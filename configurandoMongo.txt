@@ -1,0 +1,47 @@
+
+
+1 - Criar aquivo docker-compose.yml com conteudo abaixo:
+---------------------------------------------------------------------------
+version: '3'
+
+services:
+  
+  mongo:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/raphael/Desenvolvimento/Docker/Volumes/MongoDB:/data/db
+------------------------------------------------------------------------------
+
+2 - Executar na linha de comando: docker-compose up -d    
+
+3 - Conectar no mongoDB na linha de comando: docker exec -it mongodb mongo
+
+4 - No console do mongodb digirar: use admin
+
+5 - Depois digitar: 
+db.createUser(
+  {
+    user: "admin",
+    pwd: "gqt123252",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+  }
+)
+
+6 - Alterar o docker-compose.yml para:
+---------------------------------------------------------------------------
+version: '3'
+
+services:
+  
+  mongo:
+    container_name: mongodb
+    image: mongo
+    command: [--auth]
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/raphael/Desenvolvimento/Docker/Volumes/MongoDB:/data/db
+------------------------------------------------------------------------------

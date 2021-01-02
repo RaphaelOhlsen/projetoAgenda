@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  
+  mongo:
+    container_name: mongodb
+    command: [--auth]
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/raphael/Desenvolvimento/Docker/Volumes/MongoDB:/data/db
+   
